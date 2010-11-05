@@ -1,0 +1,96 @@
+#wadbug-debug{
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    opacity:0.9;
+    background-color:#000;
+    color:#ff9000;
+    font:8pt courier new;
+    overflow: hidden;
+    display:block;
+    z-index:9999;
+}
+
+.wadbug-hidden{
+    height:30px !important;
+    width:30px !important;
+    min-height:30px !important;
+    min-width:30px !important;
+}
+
+#wadbug-toggle{
+    position:absolute;
+    left:0;
+    top:0;
+    width: 100%;
+    background-color:#401000;
+    font-size:12pt;
+    padding:2px 5px;
+    height:26px;
+    line-height:26px;
+}
+
+#wadbug-toggle > span{
+    padding: 0 6px;
+}
+
+#wadbug-messages {
+    position:relative;
+    top:32px;
+}
+
+.wadbug-menuItem{
+    border-right:1px solid #9f3000;
+}
+.wadbug-hidden .wadbug-menuItem{
+    border: 0;
+}
+
+#wadbug-console {
+    overflow: hidden;
+}
+
+#wadbug-console input{
+    width:90%;
+    border: 2px solid #300;
+    color: #ffc033;
+    height:15px;
+    background-color:transparent;
+    font: 10pt courier;
+    padding: 2px;
+    margin: 2px;
+}
+
+#wadbug-miniResCon{
+    clear: both;
+    overflow: hidden;
+}
+
+#wadbug-miniRes {
+    padding:3px;
+}
+#wadbug-miniRes span {
+    color: #0f0;
+    padding-right:4px;
+}
+.wadbug-live {
+    background-color: red;
+}
+.wadbug-button:first-of-type{
+    margin-left:16px;
+}
+.wadbug-button{
+    background-color: #400;
+    margin-right:4px;
+    padding:7px;
+    display:block;
+    float:left;
+    width: 35px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    -webkit-border-radius: 8px;
+}
+.wadbug-head{ color: #0f0; }
