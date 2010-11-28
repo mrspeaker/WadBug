@@ -3,8 +3,18 @@ Mr Speaker's Web Application Debugger
 
 This is a rough little tool for inspecting a mobile web application.
 
-Include the js and css file and refresh your web app. An X will be located in the top left side of the screen. This will open the wadbug menu.
+To install (relies on jQuery):
 
-Home: some stats about the current device
-Console: a simple console for inspecting current values and running commands.
-Live: live eval code from a server
+<link rel="stylesheet" href="wadbug.css" type="text/css" charset="utf-8">
+<script src="wadbug.js" type="text/javascript" charset="utf-8"></script>
+Click on the X to open WadBug.
+
+Home: details about the current device
+
+Console: A faux console where you can see log events and execute code. Click "help" to see some useful tricks, like using ":" for inspecting objects (eg :window.document).
+
+Cache: cache manifest events (if any - will only show after a cache event has fired).
+
+Live: won't make much sense to do here - it loads a file from the server and polls for changes via Ajax. As you can't update the change file, you'll only get some sample code (an alert that shows the date) executed once.
+
+When you are developing with WadBug you can update the code and it will be automatically run on your phone, so you can do "live changes".

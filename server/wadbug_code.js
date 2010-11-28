@@ -1,4 +1,4 @@
-alert('Working! This alert was loaded from the wadbug_code.js file.');
+alert('This alert was loaded from the wadbug_code.js file.\n' + new Date() );
 <<<< // Anything after the 4 arrows won't get returned...
 
 // Click the toggle buttons

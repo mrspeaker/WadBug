@@ -1,10 +1,39 @@
 <!DOCTYPE html>
 <head>
-    <title>Wadbug test</title>
+    <title>WadBug test page</title>
     <link rel="stylesheet" href="wadbug.css" type="text/css" charset="utf-8">
+    <style type="text/css" media="screen">
+        body{
+            background-color: #eee;
+            color: #333;
+            font-family: helvetica, verdana;
+            width: 700px;
+            margin: auto;
+        }
+        h1{
+            text-shadow: 1px 1px 1px #fff;
+        }
+    </style>
 </head>
 <body>
-    <h1>Wadbug, the mobile web app toolbar</h1>
+    <h1>Wadbug: mobile web developer toolbar</h1>
+    <p>To install (relies on jQuery):</p>
+    <pre>&lt;link rel="stylesheet" href="wadbug.css" type="text/css" charset="utf-8"&gt;
+&lt;script src="wadbug.js" type="text/javascript" charset="utf-8"&gt;&lt;/script&gt;</pre>
+    <p>
+       Click on the <strong>X</strong> to open WadBug. 
+    </p>
+    <p><strong>Home</strong>: details about the current device</p>
+    <p><strong>Console</strong>: Console: A faux console where you can see log events and execute 
+        code. Click "help" to see some useful tricks, like using ":" for inspecting objects (eg :window.document).</p>
+    <p><strong>Cache</strong>: cache manifest events (if any - will only show after a cache event has fired).</p>
+    <p><strong>Live</strong>: won't make much sense to do here - it loads a file from the server
+        and polls for changes via Ajax. As you can't update the change file, you'll
+        only get some sample code (an alert that shows the date) executed once.
+    </p>
+    <p>
+        When you are developing with WadBug you can update the code and it will be
+        automatically run on your phone, so you can do "live changes".</p>
     <script src="http://code.jquery.com/jquery-1.4.4.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="wadbug.js" type="text/javascript" charset="utf-8"></script>
 </body>
