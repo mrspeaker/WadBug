@@ -1,2 +1,10 @@
 WELCOME TO WADBUG
 Mr Speaker's Web Application Debugger
+
+This is a rough little tool for inspecting a mobile web application.
+
+Include the js and css file and refresh your web app. An X will be located in the top left side of the screen. This will open the wadbug menu.
+
+Home: some stats about the current device
+Console: a simple console for inspecting current values and running commands.
+Live: live eval code from a server

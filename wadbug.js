@@ -1,25 +1,26 @@
-// Web App Debugger v0.01
-// by mr speaker
+/*
+    Web App Debugger v0.01
+    by mr speaker
+*/
 (function($, container){
 
+var nameTog = "wadbug-toggle",
+    nameMes = "wadbug-messages",
+    nameScreen = "wadbug-debug",
+    runningTime = 0,
+    doLiveUpdates = false,
+    blnFirstLive = true,
+    lastLiveHash =  -1;
+    
 var wadbug = {
+    liveUrl: "server/wadbug.php",
     
-    liveUrl: "wadbug/server/wadbug.php",
- 
-    nameTog: "wadbug-toggle",
-    nameMes: "wadbug-messages",
-    nameScreen: "wadbug-debug",
-    
-    runningTime: 0,
     consoleLog: [],
     cmdHistory: [],
     historyIndex: 0,
-    doLiveUpdates: false,
-    blnFirstLive: true,
-    lastHash:  -1,
     
     init: function(){
-        this.runningTime = new Date();
+        runningTime = new Date();
         CacheMon.init();
         
         var _this = this;
@@ -38,22 +39,22 @@ var wadbug = {
 
         $(document).ready( function(){
             var dbg = $("<div></div>")
-                .attr( "id", _this.nameScreen )
+                .attr( "id", nameScreen )
                 .addClass( "wadbug-hidden" )
                 .appendTo( container || "body" );
 
             $("<div></div>")
-                .attr( "id", _this.nameTog )
+                .attr( "id", nameTog )
                 .appendTo( dbg );
                 
             $("<div></div>")
-                .attr( "id", _this.nameMes )
+                .attr( "id", nameMes )
                 .appendTo( dbg );
             
             // Add commands
             _this.addMenuItem( "X", function(){ this.toggleMenu(); });
             _this.addMenuItem( "Home", function(){ 
-                 $("#" + this.nameMes ).html( this.getAbilities() ); 
+                 $("#" + nameMes ).html( this.getAbilities() ); 
              });
             _this.addMenuItem( "Console", function(){
                 this.setMessage( this.createMiniConsole() );
@@ -71,21 +72,21 @@ var wadbug = {
             });
             
             _this.addMenuItem( "Live", function(){
-                var menuItem = $( "#" + this.nameTog + " span:contains(Live)" );
-                if(!this.doLiveUpdates){
-                    this.doLiveUpdates = true;
+                var menuItem = $( "#" + nameTog + " span:contains(Live)" );
+                if(!doLiveUpdates){
+                    doLiveUpdates = true;
                     if(this.doLiveUpdate()){
                         menuItem.addClass( "wadbug-live" );
                     };
                 } else {
                     menuItem.removeClass( "wadbug-live" );
-                    this.doLiveUpdates = false;
+                    doLiveUpdates = false;
                 }
             });
         });
     },
     toggleMenu: function(){
-        var screen =  $( "#" + this.nameScreen );
+        var screen =  $( "#" + nameScreen );
         screen.toggleClass('wadbug-hidden');
     },
     addMenuItem: function( text, cmd ){
@@ -93,20 +94,20 @@ var wadbug = {
         return $("<span></span>")
             .text( text )
             .addClass( "wadbug-menuItem" )
-            .appendTo( "#" + _this.nameTog )
+            .appendTo( "#" + nameTog )
             .click( function(){
                 cmd.call(_this, arguments);
             });
     },
     setMessage: function( msg ){
-        $( "#" + this.nameMes ).html( msg );
+        $( "#" + nameMes ).html( msg );
     },
     makeSubHead: function( msg ){
         return "<span class='wadbug-head'>" + msg + "</span>";
     },
     getAbilities: function(){
         var msg = [];
-        msg.push( "Running time: " + ((new Date() - this.runningTime) / 1000) );
+        msg.push( "Running time: " + ((new Date() - runningTime) / 1000) );
         msg.push( "<br/>" + this.makeSubHead("[ CAPABILITIES ]") );
         msg.push( "Offline storage: " + ( window.applicationCache !== undefined ) );
         msg.push( "Web storage: " + (window.openDatabase !== undefined) ); 
@@ -278,26 +279,24 @@ var wadbug = {
         return res;
     },
     doLiveUpdate: function(){
-        var blnFirstLive = this.blnFirstLive;
-        if(this.blnFirstLive){
+        if(blnFirstLive){
             if(!confirm("Live updating will execute code from:\n" + this.liveUrl + "\nAre you sure?")){
                 return false;
             };
-            this.blnFirstLive = false;
+            blnFirstLive = false;
         }
-        
         var _this = this;
         $.ajax({
             type: "GET",
             url: _this.liveUrl,
             error: function(res){
                 alert("Live updating failed from url:\n" + _this.liveUrl + "\nError: " + res.statusText + "");
-                _this.doLiveUpdates = false;
+                doLiveUpdates = false;
             },
             success: function( data ){
                 var hash = data.slice(0,6);
-                if( hash != _this.lastHash ){
-                    _this.lastHash = hash;
+                if( hash != lastLiveHash ){
+                    lastLiveHash = hash;
                     data = data.slice(6,data.length);
                     try{
                         eval( data );
@@ -306,7 +305,7 @@ var wadbug = {
                     }
                 }
                 setTimeout( function(){
-                    if(_this.doLiveUpdates){
+                    if(doLiveUpdates){
                         _this.doLiveUpdate();
                     }
                 }, 2000);
@@ -373,4 +372,4 @@ var CacheMon = {
 
 wadbug.init();
 
-})(jQuery, "#container");
+})(jQuery);
