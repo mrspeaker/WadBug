@@ -1,7 +1,7 @@
-WELCOME TO WADBUG
+WELCOME TO WADBUG v0.01
 Mr Speaker's Web Application Debugger
-
-This is a rough little tool for inspecting a mobile web application.
+A rough little tool for inspecting a mobile web application.
+In action at: http://www.mrspeaker.net/dev/wadbug
 
 To install (relies on jQuery):
 
